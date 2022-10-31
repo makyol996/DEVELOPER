@@ -1,0 +1,21 @@
+
+
+//SELECT id, name, Active__c, phone from account where active__c = 'Yes'
+
+//select id, name, mailingcity FROM contact where name like 'b%'
+//SELECT id, name, mailingcity FROM contact WHERE name LIKE '%A'
+//SELECT id, name, mailingcity FROM contact where name LIKE '%s%'
+//SELECT id, name, mailingcity FROM contact where name LIKE 'A%Y%'
+
+//select id, name, phone, active__c from account order by name desc
+
+//select id, name, phone, active__c, createddate from account order by createddate desc LIMIT 1
+
+//SELECT ID, name, project_name__c, status__c FROM salesforce_project__c WHERE status__c !='New'
+
+//SELECT ID, name, phone, accountNumber, website FROM account WHERE (phone !=null or website !=null) and accountNumber !=null
+
+//SELECT ID, name, priority__c, status__c, subject__c FROM salesforce_Ticket__c WHERE status__c !='' and priority__c = 'High'
+
+select id, name, status__c, priority__c, salesforce_project__r.project_name__c, salesforce_project__r.status__c from salesforce_ticket__c
+
