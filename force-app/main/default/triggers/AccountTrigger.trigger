@@ -1,6 +1,13 @@
 trigger AccountTrigger on Account (before insert, before update, after insert, after update) {
+
+    TriggerSwitch__c accountSwitch = TriggerSwitch__c.getInstance('account');
+    if (accountSwitch.switch__c == false) {
+        return;
+    }
+
+
     system.debug('====trigger start======');
-    if (trigger.isBefore) {
+    if (trigger.isBefore ) {
         AccountTriggerHandler.updateDescription(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
     }
     if (Trigger.isAfter && Trigger.isInsert) {
@@ -8,15 +15,12 @@ trigger AccountTrigger on Account (before insert, before update, after insert, a
         AccountQueueableExample aq = new AccountQueueableExample(Trigger.new);
         system.enqueueJob(aq);
     }
-
-    if (trigger.isAfter && trigger.isUpdate) {
-        AccountTriggerHandler.updateVIPforAllContacts(trigger.new, trigger.old, trigger.newMap, trigger.oldMap);
+    if (Trigger.isAfter && Trigger.isUpdate) {
+        AccountTriggerHandler.updateVIPforAllContacts(Trigger.New, Trigger.Old, Trigger.NewMap, Trigger.OldMap);
     }
     
     system.debug('====trigger end====');
 }
-    
-
     /*
 
     if (trigger.isAfter && trigger.isUpdate) {
